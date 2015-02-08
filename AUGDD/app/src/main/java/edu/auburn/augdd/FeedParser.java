@@ -18,7 +18,6 @@ import java.util.List;
 
 /**
  * Created by zachary on 2/5/15.
- * <p/>
  * Parses out
  */
 public class FeedParser {
@@ -75,6 +74,7 @@ public class FeedParser {
             } else {
                 //TODO will need some sort of error handling to
             }
+            feed.concat("?units=si"); //converts to metric
         } catch (Exception e) {
             e.printStackTrace();
         }

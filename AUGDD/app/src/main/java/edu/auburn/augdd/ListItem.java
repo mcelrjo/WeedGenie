@@ -7,7 +7,18 @@ package edu.auburn.augdd;
  */
 public class ListItem {
     private String name;
-    private double threshold, gdd;
+    private double threshold;
+    private double gdd;
+
+    public double getBase() {
+        return base;
+    }
+
+    public void setBase(double base) {
+        this.base = base;
+    }
+
+    private double base;
 
     public String getName() {
         return name;

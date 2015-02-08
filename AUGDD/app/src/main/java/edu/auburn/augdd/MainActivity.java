@@ -6,13 +6,32 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends Activity {
+    private List<WeatherItem> weatherItems;
+    private List<ListItem> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TODO will need method of reading in serialized list information
+
+        FeedParser parser = new FeedParser(getApplicationContext());
+        weatherItems = parser.getData();
+
+        //TODO calculate weather information
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setBase(18);
+            list.get(i).setThreshold(150);
+            list.get(i).setGdd(calculateGDD(weatherItems.get(0).getMax(),
+                    weatherItems.get(0).getMin(), list.get(i).getBase()));
+        }
+
     }
 
 
@@ -36,5 +55,12 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * calculates GDD based on max, min, and the base value
+     */
+    private double calculateGDD(double max, double min, double base) {
+        return ((max + min) / 2) - base;
     }
 }
