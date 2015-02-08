@@ -5,7 +5,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,19 +22,32 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO will need method of reading in serialized list information
-
-        FeedParser parser = new FeedParser(getApplicationContext());
-        weatherItems = parser.getData();
-
-        //TODO calculate weather information
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setBase(18);
-            list.get(i).setThreshold(150);
-            list.get(i).setGdd(calculateGDD(weatherItems.get(0).getMax(),
-                    weatherItems.get(0).getMin(), list.get(i).getBase()));
+        //Reads in data from a file. If it doesn't exist, toast will display an error message
+        try {
+            FileInputStream fileInputStream = getApplicationContext().openFileInput(this.getPackageName()+"listItems");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            list = (List<ListItem>) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Error loading data from file", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
 
+        if (list == null || list.size() == 0) {
+            //TODO CREATE FRAGMENT FOR FIRST OBJECT AND ZIP CODE
+        } else {
+
+            FeedParser parser = new FeedParser(getApplicationContext());
+            weatherItems = parser.getData();
+
+            // calculates weather information
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setBase(18);
+                list.get(i).setThreshold(150);
+                list.get(i).setGdd(calculateGDD(weatherItems.get(0).getMax(),
+                        weatherItems.get(0).getMin(), list.get(i).getBase()));
+            }
+        }
     }
 
 
