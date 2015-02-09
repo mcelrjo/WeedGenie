@@ -1,6 +1,7 @@
 package edu.auburn.augdd;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 
@@ -63,8 +64,9 @@ public class FeedParser {
      * @return
      */
     private String getAPICall() {
+        SharedPreferences settings = context.getSharedPreferences("GDDTracker", 0);
         final Geocoder geocoder = new Geocoder(context);
-        final String zip = "36830"; //TODO will need to set up preference menu that allows zip to be set
+        final String zip = Integer.toString(settings.getInt("zipcode", 36832));
         String feed = "https://api.forecast.io/forecast/feae2be941ef3a658195cb8356696650/";
         try {
             List<Address> addresses = geocoder.getFromLocationName(zip, 1);
