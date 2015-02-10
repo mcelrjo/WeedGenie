@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/zipcode"
+        android:hint="Enter zip code"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:inputType="number"
+        android:layout_centerInParent="true" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:gravity="center"
+        android:layout_below="@id/zipcode"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+</RelativeLayout>
