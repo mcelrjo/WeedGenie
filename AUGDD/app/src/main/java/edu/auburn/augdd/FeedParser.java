@@ -71,12 +71,12 @@ public class FeedParser {
         try {
             List<Address> addresses = geocoder.getFromLocationName(zip, 1);
             if (addresses != null && !addresses.isEmpty()) {
-                feed.concat(Double.toString(addresses.get(0).getLatitude()) + ",");
-                feed.concat(Double.toString(addresses.get(0).getLongitude()));
+                feed += Double.toString(addresses.get(0).getLatitude()) + ",";
+                feed += Double.toString(addresses.get(0).getLongitude());
             } else {
                 //TODO will need some sort of error handling to
             }
-            feed.concat("?units=si"); //converts to metric
+            feed += "?units=si"; //converts to metric
         } catch (Exception e) {
             e.printStackTrace();
         }

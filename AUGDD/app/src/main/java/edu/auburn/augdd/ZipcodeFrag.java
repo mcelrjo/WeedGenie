@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,11 +17,13 @@ import android.widget.Toast;
  */
 public class ZipcodeFrag extends Fragment {
     private EditText zip;
+    private MainActivity m;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.zipcode_frag, container, false);
         zip = (EditText) rootView.findViewById(R.id.zipcode);
+        m = (MainActivity) getActivity();
         Button save = (Button) rootView.findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +33,8 @@ public class ZipcodeFrag extends Fragment {
                     SharedPreferences settings = getActivity().getSharedPreferences("GDDTracker", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putInt("zipcode", Integer.parseInt(zipString));
+                    hideSoftKeyBoard();
+                    m.downloadWeatherInfo(getActivity().getApplicationContext());
                 } else {
                     //handle case of not entering a correct zip
                     Toast.makeText(getActivity().getApplicationContext(),
@@ -37,6 +42,14 @@ public class ZipcodeFrag extends Fragment {
                 }
             }
         });
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return rootView;
+    }
+    private void hideSoftKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().
+                getSystemService(getActivity().getApplicationContext().INPUT_METHOD_SERVICE);
+
+        if(imm.isAcceptingText()) { // verify if the soft keyboard is open
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

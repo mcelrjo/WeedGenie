@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -14,37 +15,26 @@ import java.util.List;
 /**
  * Created by zachary on 2/8/15.
  */
-public class GDDAdapter extends BaseAdapter {
+public class GDDAdapter extends ArrayAdapter<ListItem> {
     private LayoutInflater mInflater;
     private List<ListItem> list;
     private Context context;
 
     public GDDAdapter(Context context, List<ListItem> list) {
-        mInflater = LayoutInflater.from(context);
-        this.context = context;
+        super(context, R.layout.listitem, list);
         this.list = list;
+        this.context = context;
     }
 
-    @Override
-    public int getCount() {
-        return 0;
-    }
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        ViewHolder holder = null;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.listitem, null);
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.listitem, parent, false);
             holder = new ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.gdd = (TextView) convertView.findViewById(R.id.gdd);
