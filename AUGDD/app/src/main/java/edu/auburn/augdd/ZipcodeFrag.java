@@ -1,5 +1,7 @@
 package edu.auburn.augdd;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,11 +32,11 @@ public class ZipcodeFrag extends Fragment {
             public void onClick(View v) {
                 String zipString = zip.getText().toString();
                 if ((zipString != null || !zipString.equals("")) && zipString.length() == 5) {
-                    SharedPreferences settings = getActivity().getSharedPreferences("GDDTracker", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("zipcode", Integer.parseInt(zipString));
+                    SharedPreferences settings = getActivity().getSharedPreferences("edu.auburn.augdd",
+                            Context.MODE_PRIVATE);
+                    settings.edit().putInt("zipcode", Integer.parseInt(zipString)).apply();
                     hideSoftKeyBoard();
-                    m.downloadWeatherInfo(getActivity().getApplicationContext());
+                    m.sendBroadcast(new Intent(m, OnAlarmReceiver.class));
                 } else {
                     //handle case of not entering a correct zip
                     Toast.makeText(getActivity().getApplicationContext(),

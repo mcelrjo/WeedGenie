@@ -5,13 +5,14 @@
 
     <EditText
         android:layout_width="match_parent"
+        android:layout_marginTop="100dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:layout_height="wrap_content"
         android:id="@+id/zipcode"
         android:hint="Enter zip code"
-        android:gravity="center"
+        android:layout_alignParentTop="true"
         android:textSize="20sp"
         android:inputType="number"
         android:layout_centerInParent="true" />

@@ -10,6 +10,10 @@ public class ListItem {
     private double threshold;
     private double gdd;
 
+    public ListItem(String name) {
+        this.name = name;
+    }
+
     public double getBase() {
         return base;
     }
