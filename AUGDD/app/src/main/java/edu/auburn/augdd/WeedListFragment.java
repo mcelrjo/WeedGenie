@@ -28,6 +28,8 @@ public class WeedListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.list_frag, container, false);
         final ListView listView = (ListView) rootView.findViewById(R.id.list);
         m = (MainActivity) getActivity();
+        m.setOptionsMenu(true);
+        m.invalidateOptionsMenu();
 
         //reads list to get most recent version
         m.readList();

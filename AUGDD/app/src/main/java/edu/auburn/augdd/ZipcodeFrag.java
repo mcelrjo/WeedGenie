@@ -3,6 +3,7 @@ package edu.auburn.augdd;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zachary on 2/9/15.
@@ -26,6 +30,8 @@ public class ZipcodeFrag extends Fragment {
         View rootView = inflater.inflate(R.layout.zipcode_frag, container, false);
         zip = (EditText) rootView.findViewById(R.id.zipcode);
         m = (MainActivity) getActivity();
+        m.setOptionsMenu(false);
+        m.invalidateOptionsMenu();
         Button save = (Button) rootView.findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +42,22 @@ public class ZipcodeFrag extends Fragment {
                             Context.MODE_PRIVATE);
                     settings.edit().putInt("zipcode", Integer.parseInt(zipString)).apply();
                     hideSoftKeyBoard();
-                    m.sendBroadcast(new Intent(m, OnAlarmReceiver.class));
+                    //TODO need async task
+                    new AsyncTask<String, Void, String>() {
+                        @Override
+                        protected String doInBackground(String... params) {
+                            FeedParser parser = new FeedParser(m.getApplicationContext());
+                            m.setWeatherItems(parser.getData());
+                            m.writeWeatherList();
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(String result) {
+                            m.changeFrag(m.PICKER);
+                        }
+                    }.execute();
+                    //m.sendBroadcast(new Intent(m, OnAlarmReceiver.class));
                 } else {
                     //handle case of not entering a correct zip
                     Toast.makeText(getActivity().getApplicationContext(),
@@ -46,11 +67,12 @@ public class ZipcodeFrag extends Fragment {
         });
         return rootView;
     }
+
     private void hideSoftKeyBoard() {
         InputMethodManager imm = (InputMethodManager) getActivity().
                 getSystemService(getActivity().getApplicationContext().INPUT_METHOD_SERVICE);
 
-        if(imm.isAcceptingText()) { // verify if the soft keyboard is open
+        if (imm.isAcceptingText()) { // verify if the soft keyboard is open
             imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         }
     }

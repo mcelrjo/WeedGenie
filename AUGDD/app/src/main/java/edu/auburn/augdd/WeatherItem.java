@@ -1,9 +1,11 @@
 package edu.auburn.augdd;
 
+import java.io.Serializable;
+
 /**
  * Created by zachary on 2/5/15.
  */
-public class WeatherItem {
+public class WeatherItem implements Serializable {
     private int time;
     private double max, min;
 

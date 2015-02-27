@@ -1,14 +1,17 @@
 package edu.auburn.augdd;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,23 +27,41 @@ public class PickerFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.list_frag, container, false);
         final ListView listView = (ListView) rootView.findViewById(R.id.list);
         m = (MainActivity) getActivity();
+        m.setOptionsMenu(false);
+        m.invalidateOptionsMenu();
         //generates list items to display that the user can choose
         getListItems();
 
-        //activity reads list from file
-        m.readList();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_1, names);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        new AsyncTask<String, Void, String>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                m.addItem(calculateGDD(list.get(position)));
-                m.writeList();
-                m.changeFrag(m.LIST);
+            protected String doInBackground(String... params) {
+                if (m.getWeatherItems() == null) {
+                    FeedParser parser = new FeedParser(m.getApplicationContext());
+                    m.setWeatherItems(parser.getData());
+                    m.writeWeatherList();
+                }
+                return null;
             }
-        });
+
+            @Override
+            protected void onPostExecute(String result) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                        android.R.layout.simple_list_item_1, names);
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        m.addItem(calculateGDD(list.get(position)));
+                        m.writeList();
+                        m.changeFrag(m.LIST);
+                    }
+                });
+            }
+        }.execute();
+        //activity reads list from file
+        //m.readList();
+
+
         return rootView;
     }
 
@@ -58,6 +79,7 @@ public class PickerFragment extends Fragment {
     }
 
     private void getListItems() {
+        list = new ArrayList<>();
         ListItem item = new ListItem("Tropical Signalgrass");
         item.setThreshold(156);
         item.setGdd(73);

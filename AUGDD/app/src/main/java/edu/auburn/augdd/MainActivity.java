@@ -2,6 +2,7 @@ package edu.auburn.augdd;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +11,10 @@ import android.view.MenuItem;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,7 @@ public class MainActivity extends FragmentActivity {
     private List<WeatherItem> weatherItems;
     private List<ListItem> list = new ArrayList<>();
     public static int PICKER = 1, LIST = 2;
+    private boolean optionMenu = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +49,18 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (optionMenu)
+            getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /* Handle action bar item clicks here. The action bar will
-        automatically handle clicks on the Home/Up button, so long
-        as you specify a parent activity in AndroidManifest.xml.*/
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add) {
+            changeFrag(PICKER);
             return true;
         }
 
@@ -131,5 +134,43 @@ public class MainActivity extends FragmentActivity {
             e.printStackTrace();
             Log.e("READ_LIST", "Unable to read list");
         }
+    }
+
+    //Writes list of items to a file
+    protected void writeWeatherList() {
+        try {
+//            FileOutputStream fos1 = getApplicationContext().openFileOutput("GDDWeather",
+//                    Context.MODE_PRIVATE);
+//            ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
+//            oos1.writeObject(weatherItems);
+//            oos1.close();
+//            FileWriter writer = new FileWriter(
+//                    Environment.getExternalStorageDirectory().getAbsolutePath()
+//                            + "/GDDTracker/WeatherItems.txt");
+//            for (WeatherItem item : weatherItems) {
+//                writer.write(item);
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("WRITE_WEATHER", "Unable to write list");
+        }
+    }
+
+    //reads list of items from file
+    protected void readWeatherList() {
+        //reads list from file
+        FileInputStream fis;
+        try {
+            fis = openFileInput("GDDWeather");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            weatherItems = (ArrayList<WeatherItem>) ois.readObject();
+            ois.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("READ_WEATHER", "Unable to read list");
+        }
+    }
+    public void setOptionsMenu(boolean bool){
+        this.optionMenu = bool;
     }
 }
