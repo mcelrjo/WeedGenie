@@ -86,11 +86,11 @@ public class MainActivity extends FragmentActivity {
         switch (type) {
             case 0: //zip
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ZipcodeFrag()).commit();
+                        new ZipcodeFrag()).addToBackStack("zip").commit();
                 break;
             case 1: //picker
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PickerFragment()).commit();
+                        new PickerFragment()).addToBackStack("picker").commit();
                 break;
             case 2: //list
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -170,7 +170,8 @@ public class MainActivity extends FragmentActivity {
             Log.e("READ_WEATHER", "Unable to read list");
         }
     }
-    public void setOptionsMenu(boolean bool){
+
+    public void setOptionsMenu(boolean bool) {
         this.optionMenu = bool;
     }
 }
