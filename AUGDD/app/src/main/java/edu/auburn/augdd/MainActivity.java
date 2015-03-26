@@ -22,7 +22,7 @@ import java.util.List;
 public class MainActivity extends FragmentActivity {
     private List<WeatherItem> weatherItems;
     private List<ListItem> list = new ArrayList<>();
-    public static int PICKER = 1, LIST = 2;
+    public static int PICKER = 1, LIST = 2, LOCATION = 0;
     private boolean optionMenu = true;
 
     @Override
@@ -30,7 +30,11 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_container);
         SharedPreferences settings = getSharedPreferences("edu.auburn.augdd", Context.MODE_PRIVATE);
-        readList();
+        try {
+            list = FileOperations.readPlantsFromFile(getApplicationContext(), "plants");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (settings.getInt("zipcode", -1) == -1) {
             //transacts a fragment to get the zip code information
@@ -58,7 +62,6 @@ public class MainActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
             changeFrag(PICKER);
             return true;
@@ -70,6 +73,10 @@ public class MainActivity extends FragmentActivity {
     //callback for ListFragment
     protected List<ListItem> getList() {
         return list;
+    }
+
+    protected void setList(List<ListItem> list){
+        this.list = list;
     }
 
     //callback for fragment
@@ -86,11 +93,11 @@ public class MainActivity extends FragmentActivity {
         switch (type) {
             case 0: //zip
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ZipcodeFrag()).addToBackStack("zip").commit();
+                        new ZipcodeFrag()).commit();
                 break;
             case 1: //picker
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PickerFragment()).addToBackStack("picker").commit();
+                        new PickerFragment()).commit();
                 break;
             case 2: //list
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -105,70 +112,6 @@ public class MainActivity extends FragmentActivity {
 
     protected void setWeatherItems(List<WeatherItem> list) {
         this.weatherItems = list;
-    }
-
-    //Writes list of items to a file
-    protected void writeList() {
-        try {
-            FileOutputStream fos1 = getApplicationContext().openFileOutput("GDDItems",
-                    Context.MODE_PRIVATE);
-            ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
-            oos1.writeObject(list);
-            oos1.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("WRITE_LIST", "Unable to write list");
-        }
-    }
-
-    //reads list of items from file
-    protected void readList() {
-        //reads list from file
-        FileInputStream fis;
-        try {
-            fis = openFileInput("GDDItems");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (ArrayList<ListItem>) ois.readObject();
-            ois.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("READ_LIST", "Unable to read list");
-        }
-    }
-
-    //Writes list of items to a file
-    protected void writeWeatherList() {
-        try {
-//            FileOutputStream fos1 = getApplicationContext().openFileOutput("GDDWeather",
-//                    Context.MODE_PRIVATE);
-//            ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
-//            oos1.writeObject(weatherItems);
-//            oos1.close();
-//            FileWriter writer = new FileWriter(
-//                    Environment.getExternalStorageDirectory().getAbsolutePath()
-//                            + "/GDDTracker/WeatherItems.txt");
-//            for (WeatherItem item : weatherItems) {
-//                writer.write(item);
-//            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("WRITE_WEATHER", "Unable to write list");
-        }
-    }
-
-    //reads list of items from file
-    protected void readWeatherList() {
-        //reads list from file
-        FileInputStream fis;
-        try {
-            fis = openFileInput("GDDWeather");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            weatherItems = (ArrayList<WeatherItem>) ois.readObject();
-            ois.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("READ_WEATHER", "Unable to read list");
-        }
     }
 
     public void setOptionsMenu(boolean bool) {

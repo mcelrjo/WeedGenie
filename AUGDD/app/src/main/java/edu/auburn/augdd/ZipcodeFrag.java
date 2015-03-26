@@ -41,6 +41,8 @@ public class ZipcodeFrag extends Fragment {
                     SharedPreferences settings = getActivity().getSharedPreferences("edu.auburn.augdd",
                             Context.MODE_PRIVATE);
                     settings.edit().putInt("zipcode", Integer.parseInt(zipString)).apply();
+                    settings.edit().putLong("latitude", 0);
+                    settings.edit().putLong("longitude", 0);
                     hideSoftKeyBoard();
                     //TODO need async task
                     new AsyncTask<String, Void, String>() {
@@ -48,7 +50,9 @@ public class ZipcodeFrag extends Fragment {
                         protected String doInBackground(String... params) {
                             FeedParser parser = new FeedParser(m.getApplicationContext());
                             m.setWeatherItems(parser.getData());
-                            m.writeWeatherList();
+                            //TODO convert list to JSON string
+                            FileOperations.writeWeatherToFile(m.getApplicationContext()
+                                    , "JSON String for converted weather items", "WEATHER");
                             return null;
                         }
 

@@ -32,7 +32,7 @@ public class WeedListFragment extends Fragment {
         m.invalidateOptionsMenu();
 
         //reads list to get most recent version
-        m.readList();
+        m.setList(FileOperations.readPlantsFromFile(m.getApplicationContext(), "PLANT_LIST"));
         //adapter created, then set for listView. Uses getList() from MainActivity
         //to retrieve list values
         listView.setAdapter(new GDDAdapter(rootView.getContext(), m.getList()));
