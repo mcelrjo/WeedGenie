@@ -3,6 +3,8 @@ package edu.auburn.augdd;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,11 +42,20 @@ public class ZipcodeFrag extends Fragment {
                 if ((zipString != null || !zipString.equals("")) && zipString.length() == 5) {
                     SharedPreferences settings = getActivity().getSharedPreferences("edu.auburn.augdd",
                             Context.MODE_PRIVATE);
-                    settings.edit().putInt("zipcode", Integer.parseInt(zipString)).apply();
-                    settings.edit().putLong("latitude", 0);
-                    settings.edit().putLong("longitude", 0);
+                    final Geocoder geocoder = new Geocoder(m.getApplicationContext());
+                    final String zip = Integer.toString(settings.getInt("zipcode", 36832));
+                    try {
+                        List<Address> addresses = geocoder.getFromLocationName(zip, 1);
+                        if (addresses != null && !addresses.isEmpty()) {
+                            settings.edit().putFloat("latitude", (float) addresses.get(0).getLatitude());
+                            settings.edit().putFloat("longitude", (float) addresses.get(0).getLongitude());
+                        } else {
+                            //TODO will need some sort of error handling to
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     hideSoftKeyBoard();
-                    //TODO need async task
                     new AsyncTask<String, Void, String>() {
                         @Override
                         protected String doInBackground(String... params) {

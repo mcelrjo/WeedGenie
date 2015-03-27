@@ -71,14 +71,13 @@ public class FeedParser {
         try {
             List<Address> addresses = geocoder.getFromLocationName(zip, 1);
             if (addresses != null && !addresses.isEmpty()) {
-                feed += Double.toString(addresses.get(0).getLatitude()) + ",";
-                feed += Double.toString(addresses.get(0).getLongitude());
-            } else {
-                //TODO will need some sort of error handling to
+                feed += settings.getFloat("latitude", (float) 32.5978) + ",";
+                feed += settings.getFloat("longitude", (float) 85.4808);
             }
             feed += "?units=si"; //converts to metric
         } catch (Exception e) {
             e.printStackTrace();
+            feed += "32.5978,854808?units=si";
         }
         return feed;
     }

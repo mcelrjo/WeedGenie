@@ -38,7 +38,8 @@ public class PickerFragment extends Fragment {
                 if (m.getWeatherItems() == null) {
                     FeedParser parser = new FeedParser(m.getApplicationContext());
                     m.setWeatherItems(parser.getData());
-                    m.writeWeatherList();
+                    FileOperations.writeWeatherToFile(m.getApplicationContext()
+                            , "JSON string for weather items", "WEATHER");
                 }
                 return null;
             }
@@ -52,7 +53,8 @@ public class PickerFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         m.addItem(calculateGDD(list.get(position)));
-                        m.writeList();
+                        FileOperations.readPlantsFromFile(m.getApplicationContext(),
+                                "PLANT_LIST");
                         m.changeFrag(m.LIST);
                     }
                 });
