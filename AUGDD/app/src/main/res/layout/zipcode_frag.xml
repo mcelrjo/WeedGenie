@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:layout_height="wrap_content"
         android:id="@+id/zipcode"
-        android:hint="Enter zip code"
+        android:hint="Enter Zip Code"
         android:layout_alignParentTop="true"
         android:textSize="20sp"
         android:inputType="number"
         android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lat"
+        android:hint="Enter Latitude"
+        android:layout_alignParentTop="true"
+        android:textSize="20sp"
+        android:inputType="number"
+        android:layout_centerInParent="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lon"
+        android:hint="Enter Longitude"
+        android:layout_alignParentTop="true"
+        android:textSize="20sp"
+        android:inputType="number"
+        android:layout_centerInParent="true" />
+
+    <DatePicker
+        android:id="@+id/datepicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"/>
 
     <Button
         android:id="@+id/save"
@@ -28,4 +68,4 @@
         android:layout_below="@id/zipcode"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
-</RelativeLayout>
+</LinearLayout>
