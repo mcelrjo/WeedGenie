@@ -68,11 +68,13 @@ public class ZipcodeFrag extends Fragment {
     }
 
     private void saveButton() {
-        SharedPreferences settings = getActivity().getSharedPreferences("edu.auburn.augdd",
+        SharedPreferences settings = m.getSharedPreferences("edu.auburn.augdd",
                 Context.MODE_PRIVATE);
         String zipString = zip.getText().toString();
         String latString = lat.getText().toString();
         String lonString = lon.getText().toString();
+        if(getDate() < Calendar.getInstance().getTimeInMillis()/1000)
+            historical = true;
         if ((zipString != null && !zipString.equals("")) && zipString.length() == 5) {
             final Geocoder geocoder = new Geocoder(m.getApplicationContext());
             try {
@@ -89,8 +91,8 @@ public class ZipcodeFrag extends Fragment {
                     FeedParser parser = new FeedParser(m.getApplicationContext());
                     m.setWeatherItems(parser.getData(historical, getDate()));
                     //TODO convert list to JSON string
-                    FileOperations.writeWeatherToFile(m.getApplicationContext()
-                            , "JSON String for converted weather items", "WEATHER");
+//                    FileOperations.writeWeatherToFile(m.getApplicationContext()
+//                            , "JSON String for converted weather items", "WEATHER");
                     return null;
                 }
 
@@ -103,17 +105,34 @@ public class ZipcodeFrag extends Fragment {
         } else if ((latString != null && !latString.equals("")) && (lonString != null && !lonString.equals(""))) {
             settings.edit().putFloat("latitude", Float.parseFloat(latString)).commit();
             settings.edit().putFloat("longitude", Float.parseFloat(lonString)).commit();
+            hideSoftKeyBoard();
+            new AsyncTask<String, Void, String>() {
+                @Override
+                protected String doInBackground(String... params) {
+                    FeedParser parser = new FeedParser(m.getApplicationContext());
+                    m.setWeatherItems(parser.getData(historical, getDate()));
+                    //TODO convert list to JSON string
+//                    FileOperations.writeWeatherToFile(m.getApplicationContext()
+//                            , "JSON String for converted weather items", "WEATHER");
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String result) {
+                    m.changeFrag(m.PICKER);
+                }
+            }.execute();
         } else {
             //handle case of not entering a correct zip
-            Toast.makeText(getActivity().getApplicationContext(),
+            Toast.makeText(m.getApplicationContext(),
                     "Invalid zip code. Try again.", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private long getDate(){
+    private long getDate() {
         Calendar cal = new GregorianCalendar(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
-        return cal.getTimeInMillis()/1000;
+        return cal.getTimeInMillis() / 1000;
     }
 
 }

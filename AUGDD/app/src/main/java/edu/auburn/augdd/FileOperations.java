@@ -54,7 +54,7 @@ public class FileOperations {
         return json;
     }
 
-    public static void writeWeatherToFile(Context context, String json, String tag) {
+    public static void writeWeather2ToFile(Context context, String json, String tag) {
         try {
             FileOutputStream fileOutputStream = context.openFileOutput(
                     context.getPackageName() + tag, Context.MODE_PRIVATE);

@@ -36,7 +36,7 @@ public class MainActivity extends FragmentActivity {
             e.printStackTrace();
         }
 
-        if (settings.getInt("zipcode", -1) == -1) {
+        if (settings.getFloat("latitude", -1) == -1) {
             //transacts a fragment to get the zip code information
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
                     new ZipcodeFrag()).commit();
