@@ -43,7 +43,7 @@ public class ZipcodeFrag extends Fragment {
         lat = (EditText) rootView.findViewById(R.id.lat);
         lon = (EditText) rootView.findViewById(R.id.lon);
         picker = (DatePicker) rootView.findViewById(R.id.datepicker);
-        picker.setMaxDate(getCurrentDate());
+        picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
 
         m = (MainActivity) getActivity();
         m.setOptionsMenu(false);
@@ -114,10 +114,6 @@ public class ZipcodeFrag extends Fragment {
     private long getDate(){
         Calendar cal = new GregorianCalendar(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
         return cal.getTimeInMillis()/1000;
-    }
-
-    private long getCurrentDate(){
-        return Calendar.getInstance().getTimeInMillis()/1000;
     }
 
 }
