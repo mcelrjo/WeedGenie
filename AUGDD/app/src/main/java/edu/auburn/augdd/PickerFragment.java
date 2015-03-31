@@ -32,32 +32,17 @@ public class PickerFragment extends Fragment {
         //generates list items to display that the user can choose
         getListItems();
 
-        new AsyncTask<String, Void, String>() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_list_item_1, names);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            protected String doInBackground(String... params) {
-                if (m.getWeatherItems() == null) {
-                    FeedParser parser = new FeedParser(m.getApplicationContext());
-                    m.setWeatherItems(parser.getData());
-                    FileOperations.writeWeatherToFile(m.getApplicationContext(), "JSON STRING OF WEATHER ITEMS", "WEATHER");
-                }
-                return null;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                m.addItem(calculateGDD(list.get(position)));
+                FileOperations.writePlantsToFile(m.getApplicationContext(), m.getList(), "PLANTS_LIST");
+                m.changeFrag(m.LIST);
             }
-
-            @Override
-            protected void onPostExecute(String result) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_list_item_1, names);
-                listView.setAdapter(adapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        m.addItem(calculateGDD(list.get(position)));
-                        FileOperations.writePlantsToFile(m.getApplicationContext(), m.getList(), "PLANTS_LIST");
-                        m.changeFrag(m.LIST);
-                    }
-                });
-            }
-        }.execute();
+        });
         //activity reads list from file
         //m.readList();
 

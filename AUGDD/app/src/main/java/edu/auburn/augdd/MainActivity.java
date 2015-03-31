@@ -81,6 +81,8 @@ public class MainActivity extends FragmentActivity {
 
     //callback for fragment
     protected void addItem(ListItem item) {
+        if(list == null)
+            list = new ArrayList<>();
         list.add(item);
     }
 

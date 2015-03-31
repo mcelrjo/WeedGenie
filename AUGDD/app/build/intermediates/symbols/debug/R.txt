@@ -334,7 +334,7 @@ int drawable abc_textfield_search_activated_mtrl_alpha 0x7f020030
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f020031
 int drawable abc_textfield_search_material 0x7f020032
 int drawable ic_launcher 0x7f020033
-int id action_add 0x7f080046
+int id action_add 0x7f080049
 int id action_bar 0x7f080031
 int id action_bar_activity_content 0x7f080000
 int id action_bar_container 0x7f080030
@@ -353,6 +353,7 @@ int id always 0x7f080016
 int id beginning 0x7f080013
 int id checkbox 0x7f080029
 int id collapseActionView 0x7f080017
+int id datepicker 0x7f080047
 int id decor_content_parent 0x7f08002f
 int id default_activity_button 0x7f080024
 int id dialog 0x7f08001b
@@ -369,9 +370,11 @@ int id homeAsUp 0x7f08000d
 int id icon 0x7f080026
 int id ifRoom 0x7f080018
 int id image 0x7f080023
+int id lat 0x7f080045
 int id list 0x7f08003f
 int id listMode 0x7f080009
 int id list_item 0x7f080025
+int id lon 0x7f080046
 int id middle 0x7f080015
 int id name 0x7f080041
 int id never 0x7f080019
@@ -380,7 +383,7 @@ int id normal 0x7f08000a
 int id progress_circular 0x7f080005
 int id progress_horizontal 0x7f080006
 int id radio 0x7f08002b
-int id save 0x7f080045
+int id save 0x7f080048
 int id search_badge 0x7f080035
 int id search_bar 0x7f080034
 int id search_button 0x7f080036
