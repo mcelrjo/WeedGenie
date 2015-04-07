@@ -40,27 +40,27 @@ public class FileOperations {
         }
     }
 
-    public static String readWeatherFromFile(Context context, String tag) {
-        String json = null;
+    public static List<WeatherItem> readWeatherFromFile(Context context, String tag) {
+        List<WeatherItem> list = null;
         try {
             FileInputStream fileInputStream = context.openFileInput(context.getPackageName() + tag);
             ObjectInputStream objectInputStream = new ObjectInputStream(
                     fileInputStream);
-            json = (String) objectInputStream.readObject();
+            list = (List<WeatherItem>) objectInputStream.readObject();
             objectInputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return json;
+        return list;
     }
 
-    public static void writeWeather2ToFile(Context context, String json, String tag) {
+    public static void writeWeatherToFile(Context context, List<WeatherItem> items, String tag) {
         try {
             FileOutputStream fileOutputStream = context.openFileOutput(
                     context.getPackageName() + tag, Context.MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                     fileOutputStream);
-            objectOutputStream.writeObject(json);
+            objectOutputStream.writeObject(items);
             objectOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();

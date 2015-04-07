@@ -22,31 +22,33 @@ import java.util.List;
  */
 public class WeedListFragment extends Fragment {
     private MainActivity m;
+    private ListView listView;
+    private GDDAdapter adapter;
+    private List<ListItem> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.list_frag, container, false);
-        final ListView listView = (ListView) rootView.findViewById(R.id.list);
+        listView = (ListView) rootView.findViewById(R.id.list);
         m = (MainActivity) getActivity();
         m.setOptionsMenu(true);
         m.invalidateOptionsMenu();
 
-        //reads list to get most recent version
-        //todo m.setList(FileOperations.readPlantsFromFile(m.getApplicationContext(), "PLANT_LIST"));
-        //adapter created, then set for listView. Uses getList() from MainActivity
-        //to retrieve list values
-        listView.setAdapter(new GDDAdapter(rootView.getContext(), m.getList()));
+        list = m.getList();
+        adapter = new GDDAdapter(rootView.getContext(), list);
+        listView.setAdapter(adapter);
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(m);
                 builder.setMessage("Delete item?").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // delete item
-                        // m.removeItem(position);
-                        dialog.dismiss();
+                        list.remove(position);
+                        m.setList(list);
+                        adapter.notifyDataSetChanged();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override

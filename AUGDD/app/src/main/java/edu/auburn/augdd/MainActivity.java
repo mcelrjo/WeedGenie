@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -31,7 +32,10 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.fragment_container);
         SharedPreferences settings = getSharedPreferences("edu.auburn.augdd", Context.MODE_PRIVATE);
         try {
-            list = FileOperations.readPlantsFromFile(getApplicationContext(), "plants");
+            if (list == null || list.size() == 0)
+                list = FileOperations.readPlantsFromFile(getApplicationContext(), "PLANTS_LIST");
+            if (weatherItems == null || weatherItems.size() == 0)
+                weatherItems = FileOperations.readWeatherFromFile(getApplicationContext(), "WEATHER");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,6 +53,14 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (list != null && weatherItems != null) {
+            FileOperations.writePlantsToFile(getApplicationContext(), list, "PLANTS_LIST");
+            FileOperations.writeWeatherToFile(getApplicationContext(), weatherItems, "WEATHER");
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,6 +77,9 @@ public class MainActivity extends FragmentActivity {
         if (id == R.id.action_add) {
             changeFrag(PICKER);
             return true;
+        } else if (id == R.id.action_change_location){
+            changeFrag(LOCATION);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -75,20 +90,17 @@ public class MainActivity extends FragmentActivity {
         return list;
     }
 
-    protected void setList(List<ListItem> list){
+    protected void setList(List<ListItem> list) {
         this.list = list;
+        FileOperations.writePlantsToFile(getApplicationContext(), list, "PLANTS_LIST");
     }
 
     //callback for fragment
     protected void addItem(ListItem item) {
-        if(list == null)
+        if (list == null)
             list = new ArrayList<>();
         list.add(item);
-    }
-
-    //callback for fragmnet
-    protected void removeItem(int position) {
-        list.remove(position);
+        FileOperations.writePlantsToFile(getApplicationContext(), list, "PLANTS_LIST");
     }
 
     protected void changeFrag(int type) {
@@ -114,6 +126,7 @@ public class MainActivity extends FragmentActivity {
 
     protected void setWeatherItems(List<WeatherItem> list) {
         this.weatherItems = list;
+        FileOperations.writeWeatherToFile(getApplicationContext(), list, "WEATHER");
     }
 
     public void setOptionsMenu(boolean bool) {

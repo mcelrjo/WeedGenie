@@ -1,10 +1,8 @@
 package edu.auburn.augdd;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -39,20 +37,19 @@ public class PickerFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m.addItem(calculateGDD(list.get(position)));
-                FileOperations.writePlantsToFile(m.getApplicationContext(), m.getList(), "PLANTS_LIST");
                 m.changeFrag(m.LIST);
             }
         });
-        //activity reads list from file
-        //m.readList();
-
 
         return rootView;
     }
 
     private ListItem calculateGDD(ListItem item) {
-        item.setGdd(gddEquation(item.getGdd(), m.getWeatherItems().get(0).getMax(),
-                m.getWeatherItems().get(0).getMin(), item.getBase()));
+        List<WeatherItem> items = m.getWeatherItems();
+        for (int i = 0; i < items.size(); i++){
+            item.setGdd(gddEquation(item.getGdd(), items.get(i).getMax(),
+                    items.get(i).getMin(), item.getBase()));
+        }
         return item;
     }
 

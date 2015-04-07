@@ -73,7 +73,7 @@ public class ZipcodeFrag extends Fragment {
         String zipString = zip.getText().toString();
         String latString = lat.getText().toString();
         String lonString = lon.getText().toString();
-        if(getDate() < Calendar.getInstance().getTimeInMillis()/1000)
+        if (getDate() < Calendar.getInstance().getTimeInMillis() / 1000)
             historical = true;
         if ((zipString != null && !zipString.equals("")) && zipString.length() == 5) {
             final Geocoder geocoder = new Geocoder(m.getApplicationContext());
@@ -82,7 +82,7 @@ public class ZipcodeFrag extends Fragment {
                 settings.edit().putFloat("latitude", (float) addresses.get(0).getLatitude());
                 settings.edit().putFloat("longitude", (float) addresses.get(0).getLongitude());
             } catch (Exception e) {
-                //TODO handle exception
+                e.printStackTrace();
             }
             hideSoftKeyBoard();
             new AsyncTask<String, Void, String>() {
@@ -90,9 +90,6 @@ public class ZipcodeFrag extends Fragment {
                 protected String doInBackground(String... params) {
                     FeedParser parser = new FeedParser(m.getApplicationContext());
                     m.setWeatherItems(parser.getData(historical, getDate()));
-                    //TODO convert list to JSON string
-//                    FileOperations.writeWeatherToFile(m.getApplicationContext()
-//                            , "JSON String for converted weather items", "WEATHER");
                     return null;
                 }
 
@@ -101,7 +98,7 @@ public class ZipcodeFrag extends Fragment {
                     m.changeFrag(m.PICKER);
                 }
             }.execute();
-            //m.sendBroadcast(new Intent(m, OnAlarmReceiver.class));
+
         } else if ((latString != null && !latString.equals("")) && (lonString != null && !lonString.equals(""))) {
             settings.edit().putFloat("latitude", Float.parseFloat(latString)).commit();
             settings.edit().putFloat("longitude", Float.parseFloat(lonString)).commit();
@@ -111,9 +108,6 @@ public class ZipcodeFrag extends Fragment {
                 protected String doInBackground(String... params) {
                     FeedParser parser = new FeedParser(m.getApplicationContext());
                     m.setWeatherItems(parser.getData(historical, getDate()));
-                    //TODO convert list to JSON string
-//                    FileOperations.writeWeatherToFile(m.getApplicationContext()
-//                            , "JSON String for converted weather items", "WEATHER");
                     return null;
                 }
 
@@ -125,7 +119,7 @@ public class ZipcodeFrag extends Fragment {
         } else {
             //handle case of not entering a correct zip
             Toast.makeText(m.getApplicationContext(),
-                    "Invalid zip code. Try again.", Toast.LENGTH_SHORT).show();
+                    "Please input correct location information.", Toast.LENGTH_SHORT).show();
         }
 
     }
