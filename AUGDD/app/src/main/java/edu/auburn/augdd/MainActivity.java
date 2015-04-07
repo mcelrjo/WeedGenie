@@ -78,6 +78,8 @@ public class MainActivity extends FragmentActivity {
             changeFrag(PICKER);
             return true;
         } else if (id == R.id.action_change_location){
+            list = new ArrayList<>();
+            weatherItems = new ArrayList<>();
             changeFrag(LOCATION);
             return true;
         }

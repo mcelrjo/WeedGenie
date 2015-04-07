@@ -39,19 +39,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6880734" vertical-offset="624" max-vertical-offset="1496">
-              <caret line="103" column="5" selection-start-line="103" selection-start-column="5" selection-end-line="103" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="403" max-vertical-offset="1530">
+              <caret line="81" column="45" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
               <folding>
                 <element signature="method#onStop#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#3002#3003#0" expanded="true" />
-                <element signature="e#3029#3030#0" expanded="true" />
+                <element signature="e#3086#3087#0" expanded="true" />
+                <element signature="e#3113#3114#0" expanded="true" />
                 <element signature="method#setList#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#addItem#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#changeFrag#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#setWeatherItems#0;class#MainActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZipcodeFrag.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/ZipcodeFrag.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9025229" vertical-offset="420" max-vertical-offset="1496">
+              <caret line="121" column="42" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+              <folding>
+                <element signature="method#hideSoftKeyBoard#0;class#ZipcodeFrag#0" expanded="false" />
+                <element signature="class#3347:3853" expanded="false" />
+                <element signature="method#doInBackground#0;class#3347:3853" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -764,8 +778,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/ZipcodeFrag.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/PickerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/WeedListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -1340,8 +1354,8 @@
           <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
           <folding>
             <element signature="method#onStop#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#3002#3003#0" expanded="true" />
-            <element signature="e#3029#3030#0" expanded="true" />
+            <element signature="e#3086#3087#0" expanded="true" />
+            <element signature="e#3113#3114#0" expanded="true" />
             <element signature="method#setList#0;class#MainActivity#0" expanded="false" />
             <element signature="method#addItem#0;class#MainActivity#0" expanded="false" />
             <element signature="method#changeFrag#0;class#MainActivity#0" expanded="false" />
@@ -1416,8 +1430,8 @@
           <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
           <folding>
             <element signature="method#onStop#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#3002#3003#0" expanded="true" />
-            <element signature="e#3029#3030#0" expanded="true" />
+            <element signature="e#3086#3087#0" expanded="true" />
+            <element signature="e#3113#3114#0" expanded="true" />
             <element signature="method#setList#0;class#MainActivity#0" expanded="false" />
             <element signature="method#addItem#0;class#MainActivity#0" expanded="false" />
             <element signature="method#changeFrag#0;class#MainActivity#0" expanded="false" />
@@ -1608,18 +1622,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/ZipcodeFrag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9025229" vertical-offset="420" max-vertical-offset="1496">
-          <caret line="121" column="42" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
-          <folding>
-            <element signature="method#hideSoftKeyBoard#0;class#ZipcodeFrag#0" expanded="false" />
-            <element signature="class#3347:3853" expanded="false" />
-            <element signature="method#doInBackground#0;class#3347:3853" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/zipcode_frag.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7443787" vertical-offset="0" max-vertical-offset="1292">
@@ -1662,16 +1664,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6880734" vertical-offset="624" max-vertical-offset="1496">
-          <caret line="103" column="5" selection-start-line="103" selection-start-column="5" selection-end-line="103" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="403" max-vertical-offset="1530">
+          <caret line="81" column="45" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
           <folding>
             <element signature="method#onStop#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#3002#3003#0" expanded="true" />
-            <element signature="e#3029#3030#0" expanded="true" />
+            <element signature="e#3086#3087#0" expanded="true" />
+            <element signature="e#3113#3114#0" expanded="true" />
             <element signature="method#setList#0;class#MainActivity#0" expanded="false" />
             <element signature="method#addItem#0;class#MainActivity#0" expanded="false" />
             <element signature="method#changeFrag#0;class#MainActivity#0" expanded="false" />
             <element signature="method#setWeatherItems#0;class#MainActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/auburn/augdd/ZipcodeFrag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9025229" vertical-offset="420" max-vertical-offset="1496">
+          <caret line="121" column="42" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+          <folding>
+            <element signature="method#hideSoftKeyBoard#0;class#ZipcodeFrag#0" expanded="false" />
+            <element signature="class#3347:3853" expanded="false" />
+            <element signature="method#doInBackground#0;class#3347:3853" expanded="false" />
           </folding>
         </state>
       </provider>
