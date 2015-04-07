@@ -6,7 +6,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/container">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -17,7 +19,15 @@
             android:text="title"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gdd_label"
+            android:padding="15dp"
+            android:textSize="14sp"
+            android:text="@string/gdd"
+            android:layout_toLeftOf="@id/gdd"
+            android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,6 +47,15 @@
             android:textSize="14sp"
             android:layout_below="@id/gdd"
             android:layout_alignParentRight="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/threshold_label"
+            android:padding="15dp"
+            android:textSize="14sp"
+            android:text="@string/threshold"
+            android:layout_below="@id/gdd_label"
+            android:layout_toLeftOf="@id/threshold"/>
 
     </RelativeLayout>
 
