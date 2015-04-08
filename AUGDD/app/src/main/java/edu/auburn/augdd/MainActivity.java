@@ -54,8 +54,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         if (list != null && weatherItems != null) {
             FileOperations.writePlantsToFile(getApplicationContext(), list, "PLANTS_LIST");
             FileOperations.writeWeatherToFile(getApplicationContext(), weatherItems, "WEATHER");
@@ -89,6 +89,8 @@ public class MainActivity extends FragmentActivity {
 
     //callback for ListFragment
     protected List<ListItem> getList() {
+        if (list == null || list.size() == 0)
+            FileOperations.readPlantsFromFile(getApplicationContext(), "PLANTS_LIST");
         return list;
     }
 
@@ -123,6 +125,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     protected List<WeatherItem> getWeatherItems() {
+        if (weatherItems == null || weatherItems.size() == 0)
+            FileOperations.readWeatherFromFile(getApplicationContext(), "WEATHER");
         return weatherItems;
     }
 

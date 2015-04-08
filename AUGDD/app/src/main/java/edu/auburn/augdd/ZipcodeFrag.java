@@ -79,8 +79,8 @@ public class ZipcodeFrag extends Fragment {
             final Geocoder geocoder = new Geocoder(m.getApplicationContext());
             try {
                 List<Address> addresses = geocoder.getFromLocationName(zipString, 1);
-                settings.edit().putFloat("latitude", (float) addresses.get(0).getLatitude());
-                settings.edit().putFloat("longitude", (float) addresses.get(0).getLongitude());
+                settings.edit().putFloat("latitude", (float) addresses.get(0).getLatitude()).commit();
+                settings.edit().putFloat("longitude", (float) addresses.get(0).getLongitude()).commit();
             } catch (Exception e) {
                 e.printStackTrace();
             }

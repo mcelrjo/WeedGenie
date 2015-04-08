@@ -1,11 +1,13 @@
 package edu.auburn.augdd;
 
+import java.io.Serializable;
+
 /**
  * Created by zachary on 2/5/15.
  * <p/>
  * This is a shell for the information obtained from forecast.io. This will be used in a ListView in MainActivity
  */
-public class ListItem {
+public class ListItem implements Serializable {
     private String name;
     private double threshold;
     private double gdd;
