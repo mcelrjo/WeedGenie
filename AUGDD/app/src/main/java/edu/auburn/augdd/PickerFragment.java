@@ -123,4 +123,5 @@ public class PickerFragment extends Fragment {
             names[i] = list.get(i).getName();
         }
     }
+
 }

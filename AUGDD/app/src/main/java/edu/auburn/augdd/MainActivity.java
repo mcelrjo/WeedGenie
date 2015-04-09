@@ -25,6 +25,7 @@ public class MainActivity extends FragmentActivity {
     private List<ListItem> list = new ArrayList<>();
     public static int PICKER = 1, LIST = 2, LOCATION = 0;
     private boolean optionMenu = true;
+    private boolean isPicker = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class MainActivity extends FragmentActivity {
         if (id == R.id.action_add) {
             changeFrag(PICKER);
             return true;
-        } else if (id == R.id.action_change_location){
+        } else if (id == R.id.action_change_location) {
             list = new ArrayList<>();
             weatherItems = new ArrayList<>();
             changeFrag(LOCATION);
@@ -110,18 +111,29 @@ public class MainActivity extends FragmentActivity {
     protected void changeFrag(int type) {
         switch (type) {
             case 0: //zip
+                isPicker = false;
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ZipcodeFrag()).commit();
                 break;
             case 1: //picker
+                isPicker = true;
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new PickerFragment()).commit();
                 break;
             case 2: //list
+                isPicker = false;
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new WeedListFragment()).commit();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isPicker)
+            changeFrag(LIST);
+        else
+            super.onBackPressed();
     }
 
     protected List<WeatherItem> getWeatherItems() {
