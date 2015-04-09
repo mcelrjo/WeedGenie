@@ -38,7 +38,7 @@
             android:textStyle="bold"
             android:text="@string/gdd"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="100dp"
+            android:layout_marginRight="80dp"
             android:layout_centerVertical="true" />
 
         <TextView
@@ -61,6 +61,6 @@
             android:textStyle="bold"
             android:layout_below="@id/gdd_label"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="100dp" />
+            android:layout_marginRight="80dp" />
     </RelativeLayout>
 </LinearLayout>
