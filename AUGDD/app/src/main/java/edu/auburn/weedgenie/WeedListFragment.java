@@ -1,4 +1,4 @@
-package edu.auburn.augdd;
+package edu.auburn.weedgenie;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,11 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

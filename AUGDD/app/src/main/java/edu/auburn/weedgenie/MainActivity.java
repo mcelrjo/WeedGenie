@@ -1,4 +1,4 @@
-package edu.auburn.augdd;
+package edu.auburn.weedgenie;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,7 +22,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_container);
-        SharedPreferences settings = getSharedPreferences("edu.auburn.augdd", Context.MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences("edu.auburn.weedgenie", Context.MODE_PRIVATE);
         try {
             if (list == null || list.size() == 0)
                 list = FileOperations.readPlantsFromFile(getApplicationContext(), "PLANTS_LIST");
@@ -31,6 +31,8 @@ public class MainActivity extends FragmentActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        isPicker = settings.getBoolean("isPicker", false);
 
         if (settings.getFloat("latitude", -1) == -1) {
             //transacts a fragment to get the zip code information
@@ -52,6 +54,8 @@ public class MainActivity extends FragmentActivity {
             FileOperations.writePlantsToFile(getApplicationContext(), list, "PLANTS_LIST");
             FileOperations.writeWeatherToFile(getApplicationContext(), weatherItems, "WEATHER");
         }
+        SharedPreferences settings = getSharedPreferences("edu.auburn.weedgenie", Context.MODE_PRIVATE);
+        settings.edit().putBoolean("isPicker", isPicker).commit();
     }
 
     @Override

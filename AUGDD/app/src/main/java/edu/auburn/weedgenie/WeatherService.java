@@ -1,14 +1,10 @@
-package edu.auburn.augdd;
+package edu.auburn.weedgenie;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

@@ -1,4 +1,4 @@
-package edu.auburn.augdd;
+package edu.auburn.weedgenie;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -62,7 +62,7 @@ public class LocationFrag extends Fragment {
     }
 
     private void saveButton() {
-        SharedPreferences settings = m.getSharedPreferences("edu.auburn.augdd",
+        SharedPreferences settings = m.getSharedPreferences("edu.auburn.weedgenie",
                 Context.MODE_PRIVATE);
         String zipString = zip.getText().toString();
         String latString = lat.getText().toString();

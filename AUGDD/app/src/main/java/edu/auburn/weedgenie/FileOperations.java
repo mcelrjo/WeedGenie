@@ -1,4 +1,4 @@
-package edu.auburn.augdd;
+package edu.auburn.weedgenie;
 
 import android.content.Context;
 

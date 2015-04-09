@@ -1,9 +1,7 @@
-package edu.auburn.augdd;
+package edu.auburn.weedgenie;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

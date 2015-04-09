@@ -462,8 +462,7 @@ int string abc_toolbar_collapse_description 0x7f0a000f
 int string action_settings 0x7f0a0010
 int string app_name 0x7f0a0011
 int string gdd 0x7f0a0012
-int string hello_world 0x7f0a0013
-int string threshold 0x7f0a0014
+int string threshold 0x7f0a0013
 int style AppTheme 0x7f0b0000
 int style Base_TextAppearance_AppCompat 0x7f0b0001
 int style Base_TextAppearance_AppCompat_Body1 0x7f0b0002
