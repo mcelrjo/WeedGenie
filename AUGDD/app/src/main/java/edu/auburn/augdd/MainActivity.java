@@ -2,20 +2,11 @@ package edu.auburn.augdd;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +35,7 @@ public class MainActivity extends FragmentActivity {
         if (settings.getFloat("latitude", -1) == -1) {
             //transacts a fragment to get the zip code information
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
-                    new ZipcodeFrag()).commit();
+                    new LocationFrag()).commit();
         } else if (list == null || list.size() == 0) {
             //run broadcast receiver
             changeFrag(PICKER);
@@ -113,7 +104,7 @@ public class MainActivity extends FragmentActivity {
             case 0: //zip
                 isPicker = false;
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ZipcodeFrag()).commit();
+                        new LocationFrag()).commit();
                 break;
             case 1: //picker
                 isPicker = true;

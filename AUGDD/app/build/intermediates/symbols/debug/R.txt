@@ -354,7 +354,7 @@ int id always 0x7f080016
 int id beginning 0x7f080013
 int id checkbox 0x7f080029
 int id collapseActionView 0x7f080017
-int id container 0x7f080041
+int id container 0x7f080042
 int id datepicker 0x7f08004a
 int id decor_content_parent 0x7f08002f
 int id default_activity_button 0x7f080024
@@ -379,7 +379,7 @@ int id listMode 0x7f080009
 int id list_item 0x7f080025
 int id lon 0x7f080049
 int id middle 0x7f080015
-int id name 0x7f080042
+int id name 0x7f080041
 int id never 0x7f080019
 int id none 0x7f08000e
 int id normal 0x7f08000a
@@ -440,8 +440,8 @@ int layout activity_main 0x7f030017
 int layout fragment_container 0x7f030018
 int layout list_frag 0x7f030019
 int layout listitem 0x7f03001a
-int layout support_simple_spinner_dropdown_item 0x7f03001b
-int layout zipcode_frag 0x7f03001c
+int layout location_frag 0x7f03001b
+int layout support_simple_spinner_dropdown_item 0x7f03001c
 int menu menu_main 0x7f0c0000
 int string abc_action_bar_home_description 0x7f0a0000
 int string abc_action_bar_home_description_format 0x7f0a0001

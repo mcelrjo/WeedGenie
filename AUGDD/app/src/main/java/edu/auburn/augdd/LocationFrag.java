@@ -1,15 +1,11 @@
 package edu.auburn.augdd;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -30,7 +24,7 @@ import java.util.List;
  * Created by zachary on 2/9/15.
  * Retrieves zip code
  */
-public class ZipcodeFrag extends Fragment {
+public class LocationFrag extends Fragment {
     private EditText zip, lat, lon;
     private MainActivity m;
     private boolean historical = false;
@@ -38,7 +32,7 @@ public class ZipcodeFrag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.zipcode_frag, container, false);
+        View rootView = inflater.inflate(R.layout.location_frag, container, false);
         zip = (EditText) rootView.findViewById(R.id.zipcode);
         lat = (EditText) rootView.findViewById(R.id.lat);
         lon = (EditText) rootView.findViewById(R.id.lon);

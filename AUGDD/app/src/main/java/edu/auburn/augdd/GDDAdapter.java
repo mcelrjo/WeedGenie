@@ -29,7 +29,6 @@ public class GDDAdapter extends ArrayAdapter<ListItem> {
     }
 
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
@@ -53,16 +52,14 @@ public class GDDAdapter extends ArrayAdapter<ListItem> {
         holder.name.setText(list.get(position).getName());
         holder.gdd.setText(String.valueOf(list.get(position).getGdd()));
         holder.threshold.setText(String.valueOf(list.get(position).getThreshold()));
-        double difference = list.get(position).getThreshold() - list.get(position).getGdd();
+        double percentage = list.get(position).getGdd() / list.get(position).getThreshold();
 
-        if (difference > 30.0) {
-            holder.container.setBackgroundColor(Color.GREEN);
-        }
-        else if (difference < 30.0 && difference > 15.0) {
-            holder.container.setBackgroundColor(Color.YELLOW);
-        }
-        else {
+        if (percentage >= 0.75) {
             holder.container.setBackgroundColor(Color.RED);
+        } else if (percentage >= 50.0 && percentage < 75.0) {
+            holder.container.setBackgroundColor(Color.YELLOW);
+        } else {
+            holder.container.setBackgroundColor(Color.GREEN);
         }
 
         return convertView;
