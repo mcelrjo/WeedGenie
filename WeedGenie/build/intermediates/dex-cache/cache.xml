@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/pre-dexed/debug/classes-98bada915d5b20492856c0a473434943588225ba.jar" />
+    </item>
+    <item
+        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-d56e2b8dff0e0e3a288a2103b3c7c2ff6d0e86fd.jar" />
+    </item>
+    <item
+        jar="/home/zachary/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/pre-dexed/debug/gson-2.3.1-d712695a7f4e75e87ecc75022d9132f10ebc8c8e.jar" />
+    </item>
+    <item
+        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/pre-dexed/debug/classes-475aeda39eff51e6359367d727aedab23f1aec5d.jar" />
+    </item>
+    <item
+        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/exploded-aar/com.commonsware.cwac/wakeful/1.0.5/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="31ae64abca8056cc6cacc200869b5e0ca82cb8e8">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/pre-dexed/debug/classes-a39b99f59b08da23a71be04ac97eb1e3cc016dab.jar" />
+    </item>
+    <item
+        jar="/home/zachary/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/AUGDD/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-97b987e8b69073e67ebcc044f54f1e2ac97aed74.jar" />
+    </item>
+
+</items>
