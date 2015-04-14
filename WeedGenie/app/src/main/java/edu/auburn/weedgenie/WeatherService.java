@@ -5,16 +5,10 @@ import android.os.AsyncTask;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by zachary on 2/23/15.
- */
 public class WeatherService extends WakefulIntentService {
     private List<WeatherItem> weatherItems;
-    private List<ListItem> list = new ArrayList<>();
 
     public WeatherService() {
         super("WeatherService");
@@ -22,30 +16,43 @@ public class WeatherService extends WakefulIntentService {
 
     @Override
     protected void doWakefulWork(Intent intent) {
+        //get weather information
         new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
-                //download
+                //gets weather information, writes it to file
                 FeedParser parser = new FeedParser(getApplicationContext());
-                weatherItems = parser.getData(false, Calendar.getInstance().getTimeInMillis()/1000);
-                return null;
-            }
+                weatherItems = parser.getData(false, 0);
+                FileOperations.writeWeatherToFile(getApplicationContext(), weatherItems, "WEATHER");
 
-            @Override
-            protected void onPostExecute(String result) {
-                //post
+                // calculate gdd, write items to file
+                List<ListItem> list = FileOperations.readPlantsFromFile(getApplicationContext(), "PLANTS_LIST");
                 for (int i = 0; i < list.size(); i++) {
-                    list.get(i).setGdd(calculateGDD(list.get(i).getGdd(), weatherItems.get(0).getMax(),
-                            weatherItems.get(0).getMin(), list.get(i).getBase()));
+                    list.set(i, calculateGDD(list.get(i)));
                 }
+
+                //todo should send notifications when values are appropriate
+
+                return null;
             }
         }.execute();
     }
 
     /**
+     * performs gdd calculation operations on an item
+     */
+    private ListItem calculateGDD(ListItem item) {
+        for (int i = 0; i < weatherItems.size(); i++) {
+            item.setGdd(gddEquation(item.getGdd(), weatherItems.get(i).getMax(),
+                    weatherItems.get(i).getMin(), item.getBase()));
+        }
+        return item;
+    }
+
+    /**
      * calculates GDD based on max, min, and the base value
      */
-    private double calculateGDD(double current, double max, double min, double base) {
+    private double gddEquation(double current, double max, double min, double base) {
         return (((max + min) / 2) - base) + current;
     }
 }

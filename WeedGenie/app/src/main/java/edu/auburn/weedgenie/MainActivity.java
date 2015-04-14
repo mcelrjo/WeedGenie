@@ -3,6 +3,7 @@ package edu.auburn.weedgenie;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -159,5 +160,9 @@ public class MainActivity extends FragmentActivity {
 
     public void setOptionsMenu(boolean bool) {
         this.optionMenu = bool;
+    }
+
+    protected void fireAlarm(){
+        sendBroadcast(new Intent(this, OnBootReceiver.class));
     }
 }

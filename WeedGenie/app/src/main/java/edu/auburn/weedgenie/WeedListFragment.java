@@ -29,6 +29,7 @@ public class WeedListFragment extends Fragment {
         m = (MainActivity) getActivity();
         m.setOptionsMenu(true);
         m.invalidateOptionsMenu();
+        m.fireAlarm();
 
         list = m.getList();
         adapter = new GDDAdapter(rootView.getContext(), list);
