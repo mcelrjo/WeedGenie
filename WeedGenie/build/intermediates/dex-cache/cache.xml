@@ -16,6 +16,13 @@
         <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/gson-2.3.1-d712695a7f4e75e87ecc75022d9132f10ebc8c8e.jar" />
     </item>
     <item
+        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/exploded-aar/com.jjoe64/graphview/4.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ae24ad61a573cd1faf8261f5ec6d8f0cb58ddaad">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/classes-d00cf213d03fbaa197618413f7892e83076430e6.jar" />
+    </item>
+    <item
         jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
