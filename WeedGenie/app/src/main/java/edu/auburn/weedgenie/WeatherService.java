@@ -1,5 +1,6 @@
 package edu.auburn.weedgenie;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -50,7 +51,8 @@ public class WeatherService extends WakefulIntentService {
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(R.drawable.notification_icon)
                             .setContentTitle(item.getName())
-                            .setContentText("The GDD for this plant is approaching its peak");
+                            .setContentText("The GDD for this plant is approaching its peak")
+                            .setDefaults(Notification.DEFAULT_ALL);
             NotificationManager mNotifyMgr =
                     (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             mNotifyMgr.notify(001, mBuilder.build());

@@ -25,17 +25,22 @@
         <receiver android:name="OnAlarmReceiver"></receiver>
 
         <service android:name=".WeatherService"></service>
+
         <activity
-            android:name="edu.auburn.weedgenie.MainActivity"
+            android:name="edu.auburn.weedgenie.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CustomActionBar"
-            android:label="@string/app_name">
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomActionBar"
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>
