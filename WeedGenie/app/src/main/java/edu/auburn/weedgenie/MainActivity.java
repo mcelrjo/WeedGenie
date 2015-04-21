@@ -23,7 +23,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_container);
+        setContentView(R.layout.activity_main);
         SharedPreferences settings = getSharedPreferences("edu.auburn.weedgenie", Context.MODE_PRIVATE);
         try {
             if (list == null || list.size() == 0)

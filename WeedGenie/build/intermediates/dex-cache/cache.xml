@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/exploded-aar/com.commonsware.cwac/wakeful/1.0.5/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="31ae64abca8056cc6cacc200869b5e0ca82cb8e8">
-        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/classes-d568a6c1d829cc316c1573e8c4c7b2bd3825de9e.jar" />
-    </item>
-    <item
         jar="/home/zachary/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -21,6 +14,20 @@
         revision="21.1.2"
         sha1="ae24ad61a573cd1faf8261f5ec6d8f0cb58ddaad">
         <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/classes-d00cf213d03fbaa197618413f7892e83076430e6.jar" />
+    </item>
+    <item
+        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/classes-3050e23d38fa71b4e5fb99edbe6bf03567d935f0.jar" />
+    </item>
+    <item
+        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/exploded-aar/com.commonsware.cwac/wakeful/1.0.5/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="31ae64abca8056cc6cacc200869b5e0ca82cb8e8">
+        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/classes-d568a6c1d829cc316c1573e8c4c7b2bd3825de9e.jar" />
     </item>
     <item
         jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
@@ -42,13 +49,6 @@
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
         <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-97b987e8b69073e67ebcc044f54f1e2ac97aed74.jar" />
-    </item>
-    <item
-        jar="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/home/zachary/Development/SENIOR_DESIGN/AUTMGDD/WeedGenie/app/build/intermediates/pre-dexed/debug/classes-3050e23d38fa71b4e5fb99edbe6bf03567d935f0.jar" />
     </item>
 
 </items>

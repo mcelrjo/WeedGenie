@@ -1,7 +1,9 @@
 package edu.auburn.weedgenie;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 
@@ -31,8 +33,6 @@ public class WeatherService extends WakefulIntentService {
                     list.set(i, calculateGDD(list.get(i)));
                 }
 
-                //todo should send notifications when values are appropriate
-
                 return null;
             }
         }.execute();
@@ -45,6 +45,16 @@ public class WeatherService extends WakefulIntentService {
         for (int i = 0; i < weatherItems.size(); i++) {
             item.setGdd(gddEquation(item.getGdd(), weatherItems.get(i).getMax(),
                     weatherItems.get(i).getMin(), item.getBase()));
+            // if (item.getGdd() / item.getThreshold() >= 0.75) {
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(this)
+                            .setSmallIcon(R.drawable.notification_icon)
+                            .setContentTitle(item.getName())
+                            .setContentText("The GDD for this plant is approaching its peak");
+            NotificationManager mNotifyMgr =
+                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            mNotifyMgr.notify(001, mBuilder.build());
+            // }
         }
         return item;
     }
