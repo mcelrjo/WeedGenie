@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "edu.auburn.augdd"
+        applicationId "edu.auburn.weedgenie"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

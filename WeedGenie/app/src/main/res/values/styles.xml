@@ -5,4 +5,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Main App Theme -->
+    <style name="CustomActionBar"
+        parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/CustomActionBarStyle</item>
+    </style>
+
+    <style name="CustomActionBarStyle"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#11aa44</item>
+    </style>
+
 </resources>
