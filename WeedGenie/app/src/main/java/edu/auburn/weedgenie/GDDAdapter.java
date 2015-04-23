@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.RelativeLayout;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class GDDAdapter extends ArrayAdapter<ListItem> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+        ViewHolder holder;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,7 +48,9 @@ public class GDDAdapter extends ArrayAdapter<ListItem> {
         }
 
         holder.name.setText(list.get(position).getName());
-        holder.gdd.setText(String.valueOf(list.get(position).getGdd()));
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        holder.gdd.setText(String.valueOf(decimalFormat.format(list.get(position).getGdd())));
         holder.threshold.setText(String.valueOf(list.get(position).getThreshold()));
         double percentage = list.get(position).getGdd() / list.get(position).getThreshold();
 
