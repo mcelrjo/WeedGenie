@@ -16,7 +16,7 @@ import java.util.List;
  * Created by zachary on 2/9/15.
  */
 public class PickerFragment extends Fragment {
-    private String[] names = null;
+    private ArrayList<String> names = null;
     private List<ListItem> list = null;
     private MainActivity m;
 
@@ -37,6 +37,7 @@ public class PickerFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m.addItem(calculateGDD(list.get(position)));
+                //names.remove(list.get(position).getName());
                 m.changeFrag(m.LIST);
             }
         });
@@ -46,7 +47,7 @@ public class PickerFragment extends Fragment {
 
     private ListItem calculateGDD(ListItem item) {
         List<WeatherItem> items = m.getWeatherItems();
-        for (int i = 0; i < items.size(); i++){
+        for (int i = 0; i < items.size(); i++) {
             item.setGdd(gddEquation(item.getGdd(), items.get(i).getMax(),
                     items.get(i).getMin(), item.getBase()));
         }
@@ -118,9 +119,9 @@ public class PickerFragment extends Fragment {
         item.setThreshold(45);
         list.add(item);
 
-        names = new String[list.size()];
+        names = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            names[i] = list.get(i).getName();
+            names.add(list.get(i).getName());
         }
     }
 

@@ -1,6 +1,7 @@
 package edu.auburn.weedgenie;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by zachary on 2/5/15.
@@ -11,6 +12,7 @@ public class ListItem implements Serializable {
     private String name;
     private double threshold;
     private double gdd;
+    private Date endDate = null;
 
     public ListItem(String name) {
         this.name = name;
@@ -48,5 +50,13 @@ public class ListItem implements Serializable {
 
     public void setGdd(double gdd) {
         this.gdd = gdd;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 }
