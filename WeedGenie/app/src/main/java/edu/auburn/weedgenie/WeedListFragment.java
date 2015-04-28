@@ -2,6 +2,7 @@ package edu.auburn.weedgenie;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +36,18 @@ public class WeedListFragment extends Fragment {
         list = m.getList();
         adapter = new GDDAdapter(rootView.getContext(), list);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(m.getApplicationContext(), GraphActivity.class);
+                ListItem tempitem = list.get(position);
+                ArrayList<Double> temp = list.get(position).getPastGDD();
+                intent.putExtra("pastData", list.get(position).getPastGDD());
+                startActivity(intent);
+            }
+        });
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

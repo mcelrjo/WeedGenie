@@ -1,6 +1,7 @@
 package edu.auburn.weedgenie;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -10,9 +11,9 @@ import java.util.Date;
  */
 public class ListItem implements Serializable {
     private String name;
-    private double threshold;
-    private double gdd;
+    private double threshold, gdd, startGDD;
     private Date endDate = null;
+    private ArrayList<Double> pastData = new ArrayList<>();
 
     public ListItem(String name) {
         this.name = name;
@@ -59,4 +60,21 @@ public class ListItem implements Serializable {
     public Date getEndDate() {
         return endDate;
     }
+
+    public void setStartGDD(double startGDD) {
+        this.startGDD = startGDD;
+    }
+
+    public double getStartGDD() {
+        return startGDD;
+    }
+
+    public void addPastGDD(double gdd) {
+        pastData.add(gdd);
+    }
+
+    public ArrayList<Double> getPastGDD() {
+        return pastData;
+    }
+
 }

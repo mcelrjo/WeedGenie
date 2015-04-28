@@ -67,6 +67,9 @@ public class LocationFrag extends Fragment {
         String zipString = zip.getText().toString();
         String latString = lat.getText().toString();
         String lonString = lon.getText().toString();
+
+        settings.edit().putLong("date", getDate()).commit();
+
         if (getDate() < Calendar.getInstance().getTimeInMillis() / 1000)
             historical = true;
         if ((zipString != null && !zipString.equals("")) && zipString.length() == 5) {

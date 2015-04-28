@@ -44,14 +44,27 @@ public class WeatherService extends WakefulIntentService {
      */
     private ListItem calculateGDD(ListItem item) {
         for (int i = 0; i < weatherItems.size(); i++) {
+            item.addPastGDD(item.getGdd());
             item.setGdd(gddEquation(item.getGdd(), weatherItems.get(i).getMax(),
                     weatherItems.get(i).getMin(), item.getBase()));
-            if (item.getGdd() / item.getThreshold() >= 0.75) {
+            if (item.getGdd() / item.getStartGDD() >= 0.75) {
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(this)
                                 .setSmallIcon(R.drawable.notification_icon)
                                 .setContentTitle(item.getName())
                                 .setContentText("The GDD for this plant is approaching its peak")
+                                .setDefaults(Notification.DEFAULT_ALL);
+                NotificationManager mNotifyMgr =
+                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                mNotifyMgr.notify(001, mBuilder.build());
+            }
+
+            if (item.getGdd() >= item.getThreshold()) {
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(this)
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle(item.getName())
+                                .setContentText("The GDD for this plant has passed its peak")
                                 .setDefaults(Notification.DEFAULT_ALL);
                 NotificationManager mNotifyMgr =
                         (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

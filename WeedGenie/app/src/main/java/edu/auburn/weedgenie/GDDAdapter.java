@@ -51,8 +51,8 @@ public class GDDAdapter extends ArrayAdapter<ListItem> {
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         holder.gdd.setText(String.valueOf(decimalFormat.format(list.get(position).getGdd())));
-        holder.threshold.setText(String.valueOf(list.get(position).getThreshold()));
-        double percentage = list.get(position).getGdd() / list.get(position).getThreshold();
+        holder.threshold.setText(String.valueOf(list.get(position).getStartGDD()));
+        double percentage = list.get(position).getGdd() / list.get(position).getStartGDD();
 
         if (percentage >= 0.75) {
             holder.container.setBackgroundColor(Color.RED);

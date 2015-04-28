@@ -100,7 +100,7 @@ public class FeedParser {
      * @return
      */
     private String getAPICall() {
-        SharedPreferences settings = context.getSharedPreferences("GDDTracker", 0);
+        SharedPreferences settings = context.getSharedPreferences("edu.auburn.weedgenie", Context.MODE_PRIVATE);
         return "https://api.forecast.io/forecast/feae2be941ef3a658195cb8356696650/"
                 + settings.getFloat("latitude", 32) + ","
                 + settings.getFloat("longitude", -85) + "?units=si";
@@ -112,7 +112,7 @@ public class FeedParser {
      * @return
      */
     private String getHistoricalAPICall(long time) {
-        SharedPreferences settings = context.getSharedPreferences("GDDTracker", 0);
+        SharedPreferences settings = context.getSharedPreferences("GDDTracker", Context.MODE_PRIVATE);
         return "https://api.forecast.io/forecast/feae2be941ef3a658195cb8356696650/"
                 + settings.getFloat("latitude", 32) + ","
                 + settings.getFloat("longitude", -85)
