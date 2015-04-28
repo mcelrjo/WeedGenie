@@ -61,6 +61,22 @@
             android:layout_height="wrap_content"
             android:calendarViewShown="false" />
 
+        <TextView
+            android:id="@+id/fetching"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:text="Fetching Weather Information" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/save"
             android:layout_width="match_parent"

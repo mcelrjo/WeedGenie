@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -29,11 +30,8 @@ public class GraphActivity extends Activity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("edu.auburn.weedgenie",
                 Context.MODE_PRIVATE);
         startDate = settings.getLong("date", 0);
-        Date date = new Date();
-        date.setTime(startDate * 1000);
         long dateTime = startDate * 1000;
         long currentDate = Calendar.getInstance().getTimeInMillis();
-
 
         long duration = currentDate - dateTime;
         int days = (int) (duration / DAY);
@@ -41,12 +39,14 @@ public class GraphActivity extends Activity {
         DataPoint[] dataPoints = new DataPoint[days];
 
         for (int i = 0; i < days; i++) {
-            dataPoints[i] = new DataPoint(i, pastData.get(i));
+            Date date = new Date(dateTime+(i*DAY));
+            dataPoints[i] = new DataPoint(date, pastData.get(i));
         }
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
         GraphView graph = (GraphView) findViewById(R.id.graph);
         graph.addSeries(series);
         graph.setTitle("Historical GDD");
-        3
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+        graph.getGridLabelRenderer().setNumHorizontalLabels(3);
     }
 }

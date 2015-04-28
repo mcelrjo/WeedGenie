@@ -42,8 +42,6 @@ public class WeedListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(m.getApplicationContext(), GraphActivity.class);
-                ListItem tempitem = list.get(position);
-                ArrayList<Double> temp = list.get(position).getPastGDD();
                 intent.putExtra("pastData", list.get(position).getPastGDD());
                 startActivity(intent);
             }

@@ -41,7 +41,6 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomActionBar"
-            android:noHistory="true"
             android:label="@string/app_name" />
         <activity
             android:name=".GraphActivity"

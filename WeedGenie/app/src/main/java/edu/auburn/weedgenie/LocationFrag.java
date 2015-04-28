@@ -14,6 +14,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -27,8 +29,10 @@ import java.util.List;
 public class LocationFrag extends Fragment {
     private EditText zip, lat, lon;
     private MainActivity m;
-    private boolean historical = false;
+    private boolean historical = false, clicked = false;
     private DatePicker picker;
+    private ProgressBar progress;
+    private TextView fetching;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class LocationFrag extends Fragment {
         lon = (EditText) rootView.findViewById(R.id.lon);
         picker = (DatePicker) rootView.findViewById(R.id.datepicker);
         picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+        progress = (ProgressBar) rootView.findViewById(R.id.progress);
+        fetching = (TextView) rootView.findViewById(R.id.fetching);
 
         m = (MainActivity) getActivity();
         m.setOptionsMenu(false);
@@ -62,63 +68,69 @@ public class LocationFrag extends Fragment {
     }
 
     private void saveButton() {
-        SharedPreferences settings = m.getSharedPreferences("edu.auburn.weedgenie",
-                Context.MODE_PRIVATE);
-        String zipString = zip.getText().toString();
-        String latString = lat.getText().toString();
-        String lonString = lon.getText().toString();
+        if (!clicked) {
+            clicked = true;
+            picker.setVisibility(View.GONE);
+            progress.setVisibility(View.VISIBLE);
+            fetching.setVisibility(View.VISIBLE);
+            SharedPreferences settings = m.getSharedPreferences("edu.auburn.weedgenie",
+                    Context.MODE_PRIVATE);
+            String zipString = zip.getText().toString();
+            String latString = lat.getText().toString();
+            String lonString = lon.getText().toString();
 
-        settings.edit().putLong("date", getDate()).commit();
+            settings.edit().putLong("date", getDate()).commit();
 
-        if (getDate() < Calendar.getInstance().getTimeInMillis() / 1000)
-            historical = true;
-        if ((zipString != null && !zipString.equals("")) && zipString.length() == 5) {
-            final Geocoder geocoder = new Geocoder(m.getApplicationContext());
-            try {
-                List<Address> addresses = geocoder.getFromLocationName(zipString, 1);
-                settings.edit().putFloat("latitude", (float) addresses.get(0).getLatitude()).commit();
-                settings.edit().putFloat("longitude", (float) addresses.get(0).getLongitude()).commit();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (getDate() < Calendar.getInstance().getTimeInMillis() / 1000)
+                historical = true;
+            if ((zipString != null && !zipString.equals("")) && zipString.length() == 5) {
+                final Geocoder geocoder = new Geocoder(m.getApplicationContext());
+                try {
+                    List<Address> addresses = geocoder.getFromLocationName(zipString, 1);
+                    settings.edit().putFloat("latitude", (float) addresses.get(0).getLatitude()).commit();
+                    settings.edit().putFloat("longitude", (float) addresses.get(0).getLongitude()).commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                hideSoftKeyBoard();
+                new AsyncTask<String, Void, String>() {
+                    @Override
+                    protected String doInBackground(String... params) {
+                        FeedParser parser = new FeedParser(m.getApplicationContext());
+                        m.setWeatherItems(parser.getData(historical, getDate()));
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        m.changeFrag(m.PICKER);
+                    }
+                }.execute();
+
+            } else if ((latString != null && !latString.equals("")) && (lonString != null && !lonString.equals(""))) {
+                settings.edit().putFloat("latitude", Float.parseFloat(latString)).commit();
+                settings.edit().putFloat("longitude", Float.parseFloat(lonString)).commit();
+                hideSoftKeyBoard();
+                new AsyncTask<String, Void, String>() {
+                    @Override
+                    protected String doInBackground(String... params) {
+                        FeedParser parser = new FeedParser(m.getApplicationContext());
+                        m.setWeatherItems(parser.getData(historical, getDate()));
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        m.changeFrag(m.PICKER);
+                    }
+                }.execute();
+            } else {
+                //handle case of not entering a correct zip
+                Toast.makeText(m.getApplicationContext(),
+                        "Please input correct location information.", Toast.LENGTH_SHORT).show();
             }
-            hideSoftKeyBoard();
-            new AsyncTask<String, Void, String>() {
-                @Override
-                protected String doInBackground(String... params) {
-                    FeedParser parser = new FeedParser(m.getApplicationContext());
-                    m.setWeatherItems(parser.getData(historical, getDate()));
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(String result) {
-                    m.changeFrag(m.PICKER);
-                }
-            }.execute();
-
-        } else if ((latString != null && !latString.equals("")) && (lonString != null && !lonString.equals(""))) {
-            settings.edit().putFloat("latitude", Float.parseFloat(latString)).commit();
-            settings.edit().putFloat("longitude", Float.parseFloat(lonString)).commit();
-            hideSoftKeyBoard();
-            new AsyncTask<String, Void, String>() {
-                @Override
-                protected String doInBackground(String... params) {
-                    FeedParser parser = new FeedParser(m.getApplicationContext());
-                    m.setWeatherItems(parser.getData(historical, getDate()));
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(String result) {
-                    m.changeFrag(m.PICKER);
-                }
-            }.execute();
-        } else {
-            //handle case of not entering a correct zip
-            Toast.makeText(m.getApplicationContext(),
-                    "Please input correct location information.", Toast.LENGTH_SHORT).show();
+            clicked = false;
         }
-
     }
 
     private long getDate() {

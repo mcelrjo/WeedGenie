@@ -50,7 +50,10 @@ public class ListItem implements Serializable {
     }
 
     public void setGdd(double gdd) {
-        this.gdd = gdd;
+        if (gdd < 0)
+            this.gdd = 0;
+        else
+            this.gdd = gdd;
     }
 
     public void setEndDate(Date endDate) {
